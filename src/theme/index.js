@@ -20,10 +20,14 @@ export const lightTheme = createTheme({
   },
 
   palette: {
-    primary: { main: "#c93dd9" },
-    secondary: { main: "#34ebe5" },
+    primary: { main: "#FAF8F9" },
+    secondary: { main: "#000" },
+    success: { main: "#0A85FF" },
     grey: { main: "#5c5b5c" },
-
+    background: {
+      default: "#F4F2F2",
+      paper: "#FAF8F9",
+    },
     mode: "light",
   },
 });
@@ -45,39 +49,14 @@ export const darkTheme = createTheme({
     },
   },
   palette: {
-    primary: { main: "#c93dd9" },
-    secondary: { main: "#34ebe5" },
+    primary: { main: "#5E6463" },
+    secondary: { main: "#fff" },
+    success: { main: "#0AFF0A" },
     grey: { main: "#cccccc" },
+    background: {
+      default: "#3C3839",
+      paper: "#504B4C",
+    },
     mode: "dark",
   },
 });
-
-// export const globalStyles = css`
-//   :root {
-//     body {
-//       background-color: #fff;
-//       color: #121212;
-//     }
-//   }
-//   [data-theme="dark"] {
-//     body {
-//       background-color: #121212;
-//       color: #fff;
-//     }
-//   }
-// `;
-
-// export const globalStyles = {
-//   ":root": {
-//     body: {
-//       backgroundColor: "#fff",
-//       color: "#121212",
-//     },
-//   },
-//   "[data-theme='dark']": {
-//     body: {
-//       backgroundColor: "#121212",
-//       color: "#fff",
-//     },
-//   },
-// };

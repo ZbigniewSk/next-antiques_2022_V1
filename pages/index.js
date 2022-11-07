@@ -1,48 +1,51 @@
 import {
-  Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Grid,
   Typography,
 } from "@mui/material";
-import axios from "axios";
+// import axios from "axios";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
-import { useContext } from "react";
 import Layout from "../components/Layout";
 import Product from "../models/Product";
+import data from "../utils/data";
 import db from "../utils/db";
-import { Store } from "../utils/Store";
+import { classes } from "../utils/styles";
 
 export default function Home(props) {
-  const { setThemeHandler, currentTheme, products } = props;
-  const { state, dispatch } = useContext(Store);
-  const router = useRouter();
+  const { setThemeHandler, currentTheme /*products*/ } = props;
 
-  const addToCartHandler = async (product) => {
-    const existItem = state.cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
-      return;
+  const { products } = data;
+
+  const oneProductForEachCategory = products.reduce(
+    (previousValue, currentValue) => {
+      if (!Array.isArray(previousValue)) {
+        previousValue = [].concat(previousValue);
+      }
+      if (
+        previousValue.find((value) => value.category === currentValue.category)
+      )
+        return previousValue;
+      return previousValue.concat(currentValue);
     }
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
-    router.push("/cart");
-  };
+  );
 
   return (
     <Layout setThemeHandler={setThemeHandler} currentTheme={currentTheme}>
-      <div>
-        <h1>Products</h1>
-        <Grid container spacing={3}>
-          {products.map((product) => (
-            <Grid item md={4} key={product.name}>
+      <div color="background">
+        <h1>Categories</h1>
+        <Grid container spacing={5}>
+          {oneProductForEachCategory.map((product) => (
+            <Grid item md={3} key={product.name}>
               <Card>
-                <NextLink href={`/product/${product.slug}`} passHref>
+                <NextLink
+                  href={`/category/${product.category
+                    .toLowerCase()
+                    .replace(/\s/, "-")}`}
+                  passHref
+                >
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -50,21 +53,16 @@ export default function Home(props) {
                       title={product.name}
                     ></CardMedia>
                     <CardContent>
-                      <Typography>{product.name}</Typography>
+                      <Typography
+                        component="h2"
+                        variant="h2"
+                        sx={classes.categoryCard}
+                      >
+                        {product.category}
+                      </Typography>
                     </CardContent>
                   </CardActionArea>
                 </NextLink>
-                <CardActions>
-                  <Typography>${product.price}</Typography>
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="text"
-                    onClick={() => addToCartHandler(product)}
-                  >
-                    Add to cart
-                  </Button>
-                </CardActions>
               </Card>
             </Grid>
           ))}

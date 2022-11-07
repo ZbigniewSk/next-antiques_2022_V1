@@ -67,19 +67,31 @@
 
 export const classes = {
   navbar: {
-    backgroundColor: "#203040",
+    // backgroundColor: "#FAF8F9",
+    minHeight: "100px",
+    boxShadow: "none",
+    borderBottom: "1px solid #B0BAB8",
     "& a": {
-      color: "#ffffff",
+      // color: "#ffffff",
       marginLeft: "10px",
     },
+    display: "flex",
   },
   grow: {
     flexGrow: 1,
   },
   brand: {
-    fontFamily: "Comfortaa, cursive",
-    fontWeight: "bold",
-    fontSize: "2rem",
+    fontFamily: "Romanesco, cursive",
+    // fontStyle: "italic",
+    fontSize: "3rem",
+    // letterSpacing: "0.2rem",
+    color: "#ff0a0a",
+  },
+  navBarContainer: {
+    display: "flex",
+  },
+  darkModeIcon: {
+    marginLeft: "10px",
   },
   main: {
     minHeight: "80vh",
@@ -98,7 +110,7 @@ export const classes = {
     width: "100%",
   },
   navbarButton: {
-    color: "#ffffff",
+    // color: "#ffffff",
     textTransform: "initial",
   },
   checkoutWizzard: {
@@ -111,5 +123,8 @@ export const classes = {
   },
   fullWidth: {
     width: "100%",
+  },
+  categoryCard: {
+    textAlign: "center",
   },
 };

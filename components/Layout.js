@@ -1,3 +1,4 @@
+import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
 import {
   AppBar,
   Badge,
@@ -6,7 +7,6 @@ import {
   Link,
   Menu,
   MenuItem,
-  Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -89,36 +89,22 @@ export default function Layout({
         <title>{title ? `${title} - Shoppo` : "Shoppo"}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
-      <AppBar position="static" sx={classes.navbar}>
+      <AppBar position="static" sx={classes.navbar} color="primary">
         <Toolbar>
           <NextLink href="/" passHref>
             <Link underline="none">
-              <Typography sx={classes.brand} color="primary">
-                shoppo
+              <Typography sx={classes.brand} color="secondary">
+                fancy Clogs
               </Typography>
             </Link>
           </NextLink>
           <div style={classes.grow}></div>
-          <div>
-            <Switch
-              checked={currentTheme === "dark" ? true : false}
-              onChange={darkModeChangeHandler}
-              color="secondary"
-            ></Switch>
-            <NextLink href="/cart" passHref>
-              <Link>
-                {cart.cartItems.length > 0 ? (
-                  <Badge badgeContent={cart.cartItems.length} color="secondary">
-                    Cart
-                  </Badge>
-                ) : (
-                  "Cart"
-                )}
-              </Link>
-            </NextLink>
+          <div style={classes.navBarContainer}>
             {userInfo ? (
               <>
                 <Button
+                  variant="outlined"
+                  color="success"
                   sx={classes.navbarButton}
                   onClick={loginClickHandler}
                   aria-controls="simple-menu"
@@ -148,15 +134,32 @@ export default function Layout({
               </>
             ) : (
               <NextLink href="/login" passHref>
-                <Link>Login</Link>
+                <Button color="success" variant="outlined">
+                  Login
+                </Button>
               </NextLink>
             )}
+            <NextLink href="/cart" passHref>
+              <Button color="success">
+                {cart.cartItems.length > 0 ? (
+                  <Badge badgeContent={cart.cartItems.length}>
+                    <ShoppingCart />
+                  </Badge>
+                ) : (
+                  <ShoppingCart />
+                )}
+              </Button>
+            </NextLink>
+
+            <Button color="success" onClick={darkModeChangeHandler}>
+              {currentTheme === "light" ? <DarkMode /> : <LightMode />}
+            </Button>
           </div>
         </Toolbar>
       </AppBar>
       <Container sx={classes.main}>{children}</Container>
       <footer style={classes.footer}>
-        <Typography>All rights reserved. Next Shoppo.</Typography>
+        <Typography>All rights reserved. Fancy Clogs.</Typography>
       </footer>
     </div>
   );
