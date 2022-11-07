@@ -23,6 +23,7 @@ export const lightTheme = createTheme({
     primary: { main: "#FAF8F9" },
     secondary: { main: "#000" },
     success: { main: "#0A85FF" },
+    warning: { main: "#ff0a0a" },
     grey: { main: "#5c5b5c" },
     background: {
       default: "#F4F2F2",
@@ -51,7 +52,8 @@ export const darkTheme = createTheme({
   palette: {
     primary: { main: "#5E6463" },
     secondary: { main: "#fff" },
-    success: { main: "#0AFF0A" },
+    success: { main: "#0AFFFF" },
+    warning: { main: "#D92D2D" },
     grey: { main: "#cccccc" },
     background: {
       default: "#3C3839",

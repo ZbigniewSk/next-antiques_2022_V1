@@ -32,9 +32,17 @@ export default function Home(props) {
     }
   );
 
+  const categories = [
+    ...oneProductForEachCategory.map((product) => product.category),
+  ];
+
   return (
-    <Layout setThemeHandler={setThemeHandler} currentTheme={currentTheme}>
-      <div color="background">
+    <Layout
+      setThemeHandler={setThemeHandler}
+      currentTheme={currentTheme}
+      categories={categories}
+    >
+      <div>
         <h1>Categories</h1>
         <Grid container spacing={5}>
           {oneProductForEachCategory.map((product) => (

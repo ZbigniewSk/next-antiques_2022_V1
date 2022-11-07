@@ -149,7 +149,7 @@ const data = {
     {
       name: "Radio Invicta",
       slug: "radio-invicta-1",
-      category: "RTV Equipment",
+      category: "RTV",
       subcategory: "Radios",
       image: "/images/vintage/RTV_equipment/radio1.jpg",
       price: 350,
@@ -162,7 +162,7 @@ const data = {
     {
       name: "Radio Philetta",
       slug: "radio-philetta-1",
-      category: "RTV Equipment",
+      category: "RTV",
       subcategory: "Radios",
       image: "/images/vintage/RTV_equipment/radio2.jpg",
       price: 850,
@@ -175,7 +175,7 @@ const data = {
     {
       name: "Jukebox",
       slug: "jukebox-1",
-      category: "RTV Equipment",
+      category: "RTV",
       subcategory: "Speekers",
       image: "/images/vintage/RTV_equipment/speeker1.jpg",
       price: 1050,
@@ -331,7 +331,7 @@ const data = {
     {
       name: "Coffee Mill No.1",
       slug: "coffee-mill-1",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Mills",
       image: "/images/vintage/household_appliances/coffee_mill1.jpg",
       price: 40,
@@ -344,7 +344,7 @@ const data = {
     {
       name: "Coffee Mill No.2",
       slug: "coffee-mill-2",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Mills",
       image: "/images/vintage/household_appliances/coffee_mill2.jpg",
       price: 30,
@@ -357,7 +357,7 @@ const data = {
     {
       name: "Coffee Mill No.3",
       slug: "coffee-mill-3",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Mills",
       image: "/images/vintage/household_appliances/coffee_mill3.jpg",
       price: 35,
@@ -370,7 +370,7 @@ const data = {
     {
       name: "Old Mill No.1",
       slug: "old-mill-1",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Mills",
       image: "/images/vintage/household_appliances/old_mill1.jpg",
       price: 40,
@@ -383,7 +383,7 @@ const data = {
     {
       name: "Old Mill No.2",
       slug: "old-mill-2",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Mills",
       image: "/images/vintage/household_appliances/old_mill2.jpg",
       price: 60,
@@ -396,7 +396,7 @@ const data = {
     {
       name: "Coffee Pot No.1",
       slug: "coffee-pot-1",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Pots",
       image: "/images/vintage/household_appliances/coffee_pot1.jpg",
       price: 100,
@@ -409,7 +409,7 @@ const data = {
     {
       name: "Coffee Pot No.2",
       slug: "coffee-pot-2",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Pots",
       image: "/images/vintage/household_appliances/coffee_pot2.jpg",
       price: 80,
@@ -422,7 +422,7 @@ const data = {
     {
       name: "Tea Pot No.1",
       slug: "tea-pot-1",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Pots",
       image: "/images/vintage/household_appliances/tea_pot1.jpg",
       price: 115,
@@ -435,7 +435,7 @@ const data = {
     {
       name: "Flat Iron No.1",
       slug: "flat-iron-1",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Irons",
       image: "/images/vintage/household_appliances/flat_iron1.jpg",
       price: 34,
@@ -448,7 +448,7 @@ const data = {
     {
       name: "Flat Iron No.2",
       slug: "flat-iron-2",
-      category: "Household Appliances",
+      category: "HA",
       subcategory: "Irons",
       image: "/images/vintage/household_appliances/flat_iron2.jpg",
       price: 37,
