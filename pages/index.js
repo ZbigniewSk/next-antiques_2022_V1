@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 // import axios from "axios";
 import NextLink from "next/link";
-import Layout from "../components/Layout";
+import LayoutHome from "../components/LayoutHome";
 import Product from "../models/Product";
 import data from "../utils/data";
 import db from "../utils/db";
@@ -37,7 +37,7 @@ export default function Home(props) {
   ];
 
   return (
-    <Layout
+    <LayoutHome
       setThemeHandler={setThemeHandler}
       currentTheme={currentTheme}
       categories={categories}
@@ -76,7 +76,7 @@ export default function Home(props) {
           ))}
         </Grid>
       </div>
-    </Layout>
+    </LayoutHome>
   );
 }
 
