@@ -1,11 +1,14 @@
 import {
-  Close,
+  ArrowBack,
   DarkMode,
   ExpandLess,
   ExpandMore,
+  Home,
   LightMode,
   Menu as MenuIcon,
+  Person,
   Search,
+  Shop,
   ShoppingCart,
 } from "@mui/icons-material";
 import {
@@ -379,92 +382,112 @@ export default function LayoutHome({
                     sx={{
                       p: 2,
                       height: 1,
-                      width: "250px",
+                      maxWidth: "300px",
                     }}
                   >
-                    <Button
-                      sx={{
-                        height: "40px",
-                        minWidth: "40px",
-                        width: "40px",
-                        padding: 0,
-                        mb: 2,
-                      }}
-                      color="success"
-                      variant="text"
-                    >
-                      <Close onClick={toggleDrawer(false)} />
-                    </Button>
+                    <ListItemButton onClick={toggleDrawer(false)}>
+                      <ListItemIcon>
+                        <ArrowBack />
+                      </ListItemIcon>
+                      <ListItemText>Back</ListItemText>
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton href="/">
+                      <ListItemIcon>
+                        <Home />
+                      </ListItemIcon>
+                      <ListItemText>Home</ListItemText>
+                    </ListItemButton>
                     <Divider />
                     <ListItemButton onClick={toggleExpandCategories}>
+                      <ListItemIcon
+                        sx={{ color: expandCategories && "warning.main" }}
+                      >
+                        <Shop />
+                      </ListItemIcon>
                       <ListItemText
                         sx={{ color: expandCategories && "warning.main" }}
                       >
                         Categories
                       </ListItemText>
                       {expandCategories ? (
-                        <ListItemIcon>
+                        <ListItemIcon
+                          sx={{
+                            justifyContent: "flex-end",
+                          }}
+                        >
                           <ExpandLess color="warning" />
                         </ListItemIcon>
                       ) : (
-                        <ListItemIcon>
+                        <ListItemIcon
+                          sx={{
+                            justifyContent: "flex-end",
+                          }}
+                        >
                           <ExpandMore />
                         </ListItemIcon>
                       )}
                     </ListItemButton>
                     <Divider />
                     {expandCategories && (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
+                      <>
                         {categories.map((category) => (
-                          <Box key={category}>
-                            <ListItemButton>
-                              <NextLink
-                                href={`/category/${category
-                                  .toLowerCase()
-                                  .replace(/\s/, "-")}`}
-                                passHref
-                              >
-                                <Link
-                                  color="secondary"
-                                  underline="none"
-                                  sx={{}}
-                                >
-                                  <Typography>{category}</Typography>
-                                </Link>
-                              </NextLink>
+                          <div key={category}>
+                            <ListItemButton
+                              href={`/category/${category
+                                .toLowerCase()
+                                .replace(/\s/, "-")}`}
+                            >
+                              <ListItemText>{category}</ListItemText>
                             </ListItemButton>
                             <Divider />
-                          </Box>
+                          </div>
                         ))}
-                      </Box>
+                      </>
                     )}
-
-                    <ListItemButton onClick={toggleExpandLogin}>
-                      <ListItemText
-                        sx={{ color: expandLogin && "warning.main" }}
-                      >
-                        User Info
-                      </ListItemText>
-                      {expandLogin ? (
-                        <ListItemIcon>
-                          <ExpandLess color="warning" />
-                        </ListItemIcon>
-                      ) : (
-                        <ListItemIcon>
-                          <ExpandMore />
-                        </ListItemIcon>
-                      )}
-                    </ListItemButton>
-                    <Divider />
-                    {expandLogin &&
-                      (userInfo ? (
-                        <>
-                          <Box>
+                    {userInfo ? (
+                      <>
+                        <ListItemButton onClick={toggleExpandLogin}>
+                          <ListItemIcon
+                            sx={{ color: expandLogin && "warning.main" }}
+                          >
+                            <Person />
+                          </ListItemIcon>
+                          <ListItemText
+                            sx={{
+                              color: expandLogin && "warning.main",
+                              "& span": {
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              },
+                            }}
+                          >
+                            <span>
+                              {userInfo.name ? userInfo.name : "User"}
+                            </span>
+                          </ListItemText>
+                          {expandLogin ? (
+                            <ListItemIcon
+                              sx={{
+                                justifyContent: "flex-end",
+                              }}
+                            >
+                              <ExpandLess color="warning" />
+                            </ListItemIcon>
+                          ) : (
+                            <ListItemIcon
+                              sx={{
+                                justifyContent: "flex-end",
+                              }}
+                            >
+                              <ExpandMore />
+                            </ListItemIcon>
+                          )}
+                        </ListItemButton>
+                        <Divider />
+                        {expandLogin && (
+                          <>
                             <ListItemButton
                               onClick={(e) =>
                                 loginMenuCloseHandler(e, "/profile")
@@ -473,8 +496,7 @@ export default function LayoutHome({
                               <ListItemText>Profile</ListItemText>
                             </ListItemButton>
                             <Divider />
-                          </Box>
-                          <Box>
+
                             <ListItemButton
                               onClick={(e) =>
                                 loginMenuCloseHandler(e, "/order-history")
@@ -483,22 +505,38 @@ export default function LayoutHome({
                               <ListItemText>Order History</ListItemText>
                             </ListItemButton>
                             <Divider />
-                          </Box>
-                          <Box>
+
                             <ListItemButton onClick={logoutClickHandler}>
                               <ListItemText>Logout</ListItemText>
                             </ListItemButton>
                             <Divider />
-                          </Box>
-                        </>
-                      ) : (
-                        <Box>
-                          <ListItemButton href="/login">
-                            <ListItemText>Login</ListItemText>
-                          </ListItemButton>
-                          <Divider />
-                        </Box>
-                      ))}
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <ListItemButton href="/login">
+                          <ListItemIcon>
+                            <Person />
+                          </ListItemIcon>
+                          <ListItemText>Login</ListItemText>
+                        </ListItemButton>
+                        <Divider />
+                      </>
+                    )}
+                    <ListItemButton href="/cart">
+                      <ListItemIcon>
+                        {cart.cartItems.length > 0 ? (
+                          <Badge badgeContent={cart.cartItems.length}>
+                            <ShoppingCart />
+                          </Badge>
+                        ) : (
+                          <ShoppingCart />
+                        )}
+                      </ListItemIcon>
+                      <ListItemText>Cart Items</ListItemText>
+                    </ListItemButton>
+                    <Divider />
                   </Box>
                 </Drawer>
               </Box>

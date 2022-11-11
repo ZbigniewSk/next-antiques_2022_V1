@@ -1,7 +1,6 @@
 import {
   Card,
   CardActionArea,
-  CardContent,
   CardMedia,
   Grid,
   Typography,
@@ -12,7 +11,6 @@ import LayoutHome from "../components/LayoutHome";
 import Product from "../models/Product";
 import data from "../utils/data";
 import db from "../utils/db";
-import { classes } from "../utils/styles";
 
 export default function Home(props) {
   const { setThemeHandler, currentTheme /*products*/ } = props;
@@ -44,34 +42,57 @@ export default function Home(props) {
     >
       <div>
         <h1>Categories</h1>
-        <Grid container spacing={5}>
+        <Grid container rowSpacing={4} columnSpacing={8}>
           {oneProductForEachCategory.map((product) => (
-            <Grid item md={3} key={product.name}>
-              <Card>
-                <NextLink
-                  href={`/category/${product.category
-                    .toLowerCase()
-                    .replace(/\s/, "-")}`}
-                  passHref
+            <Grid item xs={12} sm={6} md={4} lg={3} key={product.name}>
+              <NextLink
+                href={`/category/${product.category
+                  .toLowerCase()
+                  .replace(/\s/, "-")}`}
+                passHref
+              >
+                <Card
+                  sx={{
+                    margin: "0 auto 0 auto",
+                    width: "200px",
+                    height: "200px",
+                    borderRadius: "50%",
+                    border: "2px solid",
+                    borderColor: "primary.main",
+
+                    "&:hover": {
+                      boxShadow: "0 5px 20px -5px",
+                      color: "success.main",
+                      "+tekscik": {
+                        color: "red",
+                      },
+                    },
+                  }}
                 >
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       image={product.image}
                       title={product.name}
+                      sx={{
+                        width: "200px",
+                        height: "200px",
+                        borderRadius: "50%",
+                      }}
                     ></CardMedia>
-                    <CardContent>
-                      <Typography
-                        component="h2"
-                        variant="h2"
-                        sx={classes.categoryCard}
-                      >
-                        {product.category}
-                      </Typography>
-                    </CardContent>
                   </CardActionArea>
-                </NextLink>
-              </Card>
+                </Card>
+              </NextLink>
+              <Typography
+                className="tekscik"
+                component="h2"
+                variant="h2"
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                {product.category}
+              </Typography>
             </Grid>
           ))}
         </Grid>

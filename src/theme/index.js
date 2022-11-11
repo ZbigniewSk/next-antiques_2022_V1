@@ -55,10 +55,10 @@ export const darkTheme = createTheme({
     success: { main: "#0AFFFF" },
     warning: { main: "#D92D2D" },
     grey: { main: "#cccccc" },
-    background: {
-      default: "#3C3839",
-      paper: "#504B4C",
-    },
+    // background: {
+    //   default: "#3C3839",
+    //   paper: "#504B4C",
+    // },
     mode: "dark",
   },
 });
