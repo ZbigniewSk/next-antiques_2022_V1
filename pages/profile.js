@@ -1,9 +1,13 @@
+import { History, Person } from "@mui/icons-material";
 import {
   Button,
   Card,
+  Divider,
   Grid,
   List,
   ListItem,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
   TextField,
   Typography,
@@ -17,10 +21,8 @@ import { Controller, useForm } from "react-hook-form";
 import Layout from "../components/Layout";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
-import { classes } from "../utils/styles";
 
 export default function Profile(props) {
-  const { setThemeHandler, currentTheme } = props;
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const router = useRouter();
@@ -70,31 +72,34 @@ export default function Profile(props) {
   };
 
   return (
-    <Layout
-      title="User Profile"
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-    >
+    <Layout title="User Profile" props={props}>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card sx={classes.section}>
-            <List>
-              <NextLink href="/profile" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="User Profile"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/order-history" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Order History"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
+          <Card sx={{ mt: "10px" }}>
+            <NextLink href="/profile" passHref>
+              <ListItemButton selected>
+                <ListItemIcon sx={{ color: "warning.main" }}>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText sx={{ color: "warning.main" }}>
+                  User Profile
+                </ListItemText>
+              </ListItemButton>
+            </NextLink>
+            <Divider />
+            <NextLink href="/order-history" passHref>
+              <ListItemButton>
+                <ListItemIcon>
+                  <History />
+                </ListItemIcon>
+                <ListItemText>Order History</ListItemText>
+              </ListItemButton>
+            </NextLink>
           </Card>
         </Grid>
 
         <Grid item md={9} xs={12}>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography component="h1" variant="h1">
@@ -103,7 +108,11 @@ export default function Profile(props) {
               </ListItem>
               <ListItem>
                 <form
-                  style={classes.form}
+                  style={{
+                    maxWidth: "800px",
+                    margin: "0 auto",
+                    width: "100%",
+                  }}
                   onSubmit={handleSubmit(submitHandler)}
                 >
                   <List>
@@ -118,6 +127,7 @@ export default function Profile(props) {
                         }}
                         render={({ field }) => (
                           <TextField
+                            color="success"
                             variant="outlined"
                             fullWidth
                             id="name"
@@ -147,6 +157,7 @@ export default function Profile(props) {
                         }}
                         render={({ field }) => (
                           <TextField
+                            color="success"
                             variant="outlined"
                             fullWidth
                             id="email"
@@ -178,6 +189,7 @@ export default function Profile(props) {
                         }}
                         render={({ field }) => (
                           <TextField
+                            color="success"
                             variant="outlined"
                             fullWidth
                             id="password"
@@ -207,6 +219,7 @@ export default function Profile(props) {
                         }}
                         render={({ field }) => (
                           <TextField
+                            color="success"
                             variant="outlined"
                             fullWidth
                             id="confirmPassword"
@@ -228,7 +241,7 @@ export default function Profile(props) {
                         variant="outlined"
                         type="submit"
                         fullWidth
-                        color="primary"
+                        color="success"
                       >
                         Update
                       </Button>

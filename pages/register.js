@@ -18,8 +18,6 @@ import { Store } from "../utils/Store";
 import { classes } from "../utils/styles";
 
 export default function Register(props) {
-  const { currentTheme, setThemeHandler } = props;
-
   const {
     handleSubmit,
     control,
@@ -63,11 +61,7 @@ export default function Register(props) {
   };
 
   return (
-    <Layout
-      title="Register"
-      currentTheme={currentTheme}
-      setThemeHandler={setThemeHandler}
-    >
+    <Layout title="Register" props={props}>
       <form style={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">
           Register
@@ -84,6 +78,7 @@ export default function Register(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="name"
@@ -113,6 +108,7 @@ export default function Register(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="email"
@@ -142,6 +138,7 @@ export default function Register(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="password"
@@ -171,6 +168,7 @@ export default function Register(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="confirmPassword"
@@ -190,14 +188,14 @@ export default function Register(props) {
             ></Controller>
           </ListItem>
           <ListItem>
-            <Button variant="outlined" type="submit" fullWidth color="primary">
+            <Button variant="outlined" type="submit" fullWidth color="success">
               Register
             </Button>
           </ListItem>
           <ListItem>
             Already have an account?&nbsp;
             <NextLink passHref href={`/login?redirect=${redirect || "/"}`}>
-              <Link>Login</Link>
+              <Link color="secondary">Login</Link>
             </NextLink>
           </ListItem>
         </List>

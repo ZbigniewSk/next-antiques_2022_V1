@@ -8,8 +8,6 @@ import { Store } from "../utils/Store";
 import { classes } from "../utils/styles";
 
 export default function Shipping(props) {
-  const { currentTheme, setThemeHandler } = props;
-
   const {
     handleSubmit,
     control,
@@ -61,11 +59,7 @@ export default function Shipping(props) {
   };
 
   return (
-    <Layout
-      title="Shipping"
-      currentTheme={currentTheme}
-      setThemeHandler={setThemeHandler}
-    >
+    <Layout title="Shipping" props={props}>
       <CheckoutWizzard activeStep={1} />
       <form style={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">

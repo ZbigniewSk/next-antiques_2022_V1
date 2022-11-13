@@ -22,10 +22,11 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import Layout from "../components/Layout";
+import Product from "../models/Product";
+import db from "../utils/db";
 import { Store } from "../utils/Store";
 
 export default function CartScreen(props) {
-  const { setThemeHandler, currentTheme } = props;
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { cartItems } = cart;
@@ -54,11 +55,7 @@ export default function CartScreen(props) {
   };
 
   return (
-    <Layout
-      title="Shopping Cart"
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-    >
+    <Layout title="Shopping Cart" props={props}>
       <Typography component="h1" variant="h1">
         Shopping Cart
       </Typography>
@@ -94,6 +91,8 @@ export default function CartScreen(props) {
                               alt={item.name}
                               width={50}
                               height={50}
+                              layout="responsive"
+                              objectFit="contain"
                             ></Image>
                           </Link>
                         </NextLink>
@@ -125,7 +124,7 @@ export default function CartScreen(props) {
                       <TableCell align="right">${item.price}</TableCell>
                       <TableCell align="right">
                         <Button
-                          variant="outlined"
+                          variant="text"
                           color="warning"
                           onClick={() => removeItemHandler(item)}
                         >
@@ -167,4 +166,14 @@ export default function CartScreen(props) {
   );
 }
 
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObj),
+    },
+  };
+}
 // export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });

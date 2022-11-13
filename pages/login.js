@@ -18,8 +18,6 @@ import { Store } from "../utils/Store";
 import { classes } from "../utils/styles";
 
 export default function Login(props) {
-  const { currentTheme, setThemeHandler } = props;
-
   const {
     handleSubmit,
     control,
@@ -58,11 +56,7 @@ export default function Login(props) {
   };
 
   return (
-    <Layout
-      title="Login"
-      currentTheme={currentTheme}
-      setThemeHandler={setThemeHandler}
-    >
+    <Layout title="Login" props={props}>
       <form style={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">
           Login
@@ -79,6 +73,7 @@ export default function Login(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="email"
@@ -108,6 +103,7 @@ export default function Login(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="password"
@@ -127,14 +123,14 @@ export default function Login(props) {
             ></Controller>
           </ListItem>
           <ListItem>
-            <Button variant="outlined" type="submit" fullWidth color="primary">
+            <Button variant="outlined" type="submit" fullWidth color="success">
               Login
             </Button>
           </ListItem>
           <ListItem>
             Don&apos;t have an account?&nbsp;
             <NextLink passHref href={`/register?redirect=${redirect || "/"}`}>
-              <Link>Register</Link>
+              <Link color="secondary">Register</Link>
             </NextLink>
           </ListItem>
         </List>

@@ -88,7 +88,7 @@ export const theme = (mode) =>
             secondary: { main: "#fff" },
             success: { main: "#0AFFFF" },
             warning: { main: "#D92D2D" },
-            grey: { main: "#cccccc" },
+            // grey: { main: "#cccccc" },
             // background: {
             //   default: "#3C3839",
             //   paper: "#504B4C",
@@ -100,7 +100,7 @@ export const theme = (mode) =>
             secondary: { main: "#000" },
             success: { main: "#0A85FF" },
             warning: { main: "#ff0a0a" },
-            grey: { main: "#5c5b5c" },
+            // grey: { main: "#5c5b5c" },
             background: {
               default: "#F4F2F2",
               paper: "#FAF8F9",

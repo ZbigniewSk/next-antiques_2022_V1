@@ -17,7 +17,6 @@ import { Store } from "../utils/Store";
 import { classes } from "../utils/styles";
 
 export default function Payment(props) {
-  const { currentTheme, setThemeHandler } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -66,11 +65,7 @@ export default function Payment(props) {
   };
 
   return (
-    <Layout
-      title="Payment Method"
-      currentTheme={currentTheme}
-      setThemeHandler={setThemeHandler}
-    >
+    <Layout title="Payment Method" props={props}>
       <CheckoutWizzard activeStep={2} />
       <form styles={classes.form} onSubmit={submitHandler}>
         <Typography component="h1" variant="h1">

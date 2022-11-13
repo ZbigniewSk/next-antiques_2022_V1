@@ -6,24 +6,25 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Link,
   Typography,
 } from "@mui/material";
-// import axios from "axios";
+import axios from "axios";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import Layout from "../../components/Layout";
-//   import Product from "../models/Product";
-import data from "../../utils/data";
-//   import db from "../utils/db";
+import Product from "../../models/Product";
+// import data from "../../utils/data";
+import db from "../../utils/db";
 import { Store } from "../../utils/Store";
 
 export default function Category(props) {
-  const { setThemeHandler, currentTheme /*products*/ } = props;
+  const { products } = props;
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
 
-  const { products } = data;
+  // const { products } = data;
 
   const { category } = router.query;
   const productsOfOneCategory = products.filter(
@@ -33,7 +34,7 @@ export default function Category(props) {
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    // const { data } = await axios.get(`/api/products/${product._id}`);
+    const { data } = await axios.get(`/api/products/${product._id}`);
 
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
@@ -44,7 +45,24 @@ export default function Category(props) {
   };
 
   return (
-    <Layout setThemeHandler={setThemeHandler} currentTheme={currentTheme}>
+    <Layout
+      title={
+        productsOfOneCategory && productsOfOneCategory.find(() => true).category
+      }
+      props={props}
+    >
+      <div
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        <NextLink href="/" passHref>
+          <Link color="secondary">
+            <Typography>back to categories</Typography>
+          </Link>
+        </NextLink>
+      </div>
       <div>
         <h1>
           {productsOfOneCategory &&
@@ -95,4 +113,15 @@ export default function Category(props) {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObj),
+    },
+  };
 }

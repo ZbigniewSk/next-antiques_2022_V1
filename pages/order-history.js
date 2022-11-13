@@ -1,10 +1,14 @@
+import { History, Person } from "@mui/icons-material";
 import {
   Button,
   Card,
   CircularProgress,
+  Divider,
   Grid,
   List,
   ListItem,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
   Table,
   TableBody,
@@ -36,7 +40,6 @@ function reducer(state, action) {
 }
 
 export default function OrderHistory(props) {
-  const { setThemeHandler, currentTheme } = props;
   const router = useRouter();
 
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
@@ -69,31 +72,34 @@ export default function OrderHistory(props) {
   }, []);
 
   return (
-    <Layout
-      title="Order History"
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-    >
+    <Layout title="Order History" props={props}>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card sx={classes.section}>
-            <List>
-              <NextLink href="/profile" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="User Profile"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/order-history" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Order History"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
+          <Card sx={{ mt: "10px" }}>
+            <NextLink href="/profile" passHref>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText>User Profile</ListItemText>
+              </ListItemButton>
+            </NextLink>
+            <Divider />
+            <NextLink href="/order-history" passHref>
+              <ListItemButton selected>
+                <ListItemIcon sx={{ color: "warning.main" }}>
+                  <History />
+                </ListItemIcon>
+                <ListItemText sx={{ color: "warning.main" }}>
+                  Order History
+                </ListItemText>
+              </ListItemButton>
+            </NextLink>
           </Card>
         </Grid>
 
         <Grid item md={9} xs={12}>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography component="h1" variant="h1">
@@ -136,7 +142,7 @@ export default function OrderHistory(props) {
                             </TableCell>
                             <TableCell>
                               <NextLink href={`/order/${order._id}`} passHref>
-                                <Button color="grey" variant="outlined">
+                                <Button color="success" variant="text">
                                   Details
                                 </Button>
                               </NextLink>

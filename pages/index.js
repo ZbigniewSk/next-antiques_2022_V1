@@ -7,15 +7,15 @@ import {
 } from "@mui/material";
 // import axios from "axios";
 import NextLink from "next/link";
-import LayoutHome from "../components/LayoutHome";
+import Layout from "../components/Layout";
 import Product from "../models/Product";
-import data from "../utils/data";
+// import data from "../utils/data";
 import db from "../utils/db";
 
 export default function Home(props) {
-  const { setThemeHandler, currentTheme /*products*/ } = props;
+  const { products } = props;
 
-  const { products } = data;
+  // const { products } = data;
 
   const oneProductForEachCategory = products.reduce(
     (previousValue, currentValue) => {
@@ -30,16 +30,8 @@ export default function Home(props) {
     }
   );
 
-  const categories = [
-    ...oneProductForEachCategory.map((product) => product.category),
-  ];
-
   return (
-    <LayoutHome
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-      categories={categories}
-    >
+    <Layout props={props}>
       <div>
         <h1>Categories</h1>
         <Grid container rowSpacing={4} columnSpacing={8}>
@@ -92,7 +84,7 @@ export default function Home(props) {
           ))}
         </Grid>
       </div>
-    </LayoutHome>
+    </Layout>
   );
 }
 

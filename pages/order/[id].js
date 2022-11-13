@@ -47,7 +47,7 @@ function reducer(state, action) {
 }
 
 export default function Order(props) {
-  const { setThemeHandler, currentTheme, params } = props;
+  const { params } = props;
   const orderId = params.id;
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const { state } = useContext(Store);
@@ -164,11 +164,7 @@ export default function Order(props) {
   }
 
   return (
-    <Layout
-      title={`Order ${orderId}`}
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-    >
+    <Layout title={`Order ${orderId}`} props={props}>
       <Typography component="h1" variant="h1">
         Order {orderId}
       </Typography>

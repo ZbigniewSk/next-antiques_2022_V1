@@ -27,7 +27,6 @@ import { Store } from "../utils/Store";
 import { classes } from "../utils/styles";
 
 export default function PlaceOrder(props) {
-  const { setThemeHandler, currentTheme } = props;
   const { state, dispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const { cartItems, shippingAddress, paymentMethod } = cart;
@@ -112,11 +111,7 @@ export default function PlaceOrder(props) {
   };
 
   return (
-    <Layout
-      title="Place Order"
-      setThemeHandler={setThemeHandler}
-      currentTheme={currentTheme}
-    >
+    <Layout title="Place Order" props={props}>
       <CheckoutWizzard activeStep={3} />
       <Typography component="h1" variant="h1">
         Place Order

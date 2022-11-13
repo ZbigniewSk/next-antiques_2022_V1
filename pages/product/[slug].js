@@ -5,24 +5,27 @@ import {
   Link,
   List,
   ListItem,
+  Rating,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import Layout from "../../components/Layout";
-import data from "../../utils/data";
+import Product from "../../models/Product";
+import db from "../../utils/db";
+// import data from "../../utils/data";
 import { Store } from "../../utils/Store";
-import { classes } from "../../utils/styles";
 
 export default function ProductScreen(props) {
-  const { setThemeHandler, currentTheme /*product*/ } = props;
+  const { product } = props;
   // const classes = useStyles();
   const router = useRouter();
-  const { products } = data;
-  const { slug } = router.query;
-  const product = products.find((a) => a.slug === slug);
+  // const { products } = data;
+  // const { slug } = router.query;
+  // const product = products.find((a) => a.slug === slug);
   const { state, dispatch } = useContext(Store);
   // const router = useRouter();
   if (!product) {
@@ -32,11 +35,11 @@ export default function ProductScreen(props) {
   const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    // const { data } = await axios.get(`/api/products/${product._id}`);
-    // if (data.countInStock < quantity) {
-    //   window.alert("Sorry. Product is out of stock");
-    //   return;
-    // }
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
@@ -45,13 +48,22 @@ export default function ProductScreen(props) {
     <Layout
       title={product.name}
       description={product.description}
-      currentTheme={currentTheme}
-      setThemeHandler={setThemeHandler}
+      props={props}
     >
-      <div style={classes.section}>
-        <NextLink href="/" passHref>
+      <div
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        <NextLink
+          href={`/category/${product.category
+            .toLowerCase()
+            .replace(/\s/, "-")}`}
+          passHref
+        >
           <Link color="secondary">
-            <Typography>back to products</Typography>
+            <Typography>{`back to ${product.category}`}</Typography>
           </Link>
         </NextLink>
       </div>
@@ -80,9 +92,11 @@ export default function ProductScreen(props) {
               <Typography>Brand: {product.brand}</Typography>
             </ListItem>
             <ListItem>
-              <Typography>
-                Rating: {product.rating} stars ({product.numReviews} reviews)
-              </Typography>
+              <Typography>Rating: &nbsp;</Typography>
+              <Rating value={product.rating} readOnly></Rating>
+            </ListItem>
+            <ListItem>
+              <Typography>Reviews: {product.numReviews}</Typography>
             </ListItem>
             <ListItem>
               <Typography>Description: {product.description}</Typography>
@@ -132,15 +146,17 @@ export default function ProductScreen(props) {
   );
 }
 
-// export async function getServerSideProps(ctx) {
-//   const { params } = ctx;
-//   const { slug } = params;
-//   await db.connect();
-//   const product = await Product.findOne({ slug }).lean();
-//   await db.disconnect();
-//   return {
-//     props: {
-//       product: db.convertDocToObj(product),
-//     },
-//   };
-// }
+export async function getServerSideProps(ctx) {
+  const { params } = ctx;
+  const { slug } = params;
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: db.convertDocToObj(product),
+      products: products.map(db.convertDocToObj),
+    },
+  };
+}
