@@ -184,7 +184,9 @@ export default function PlaceOrder(props) {
                           <TableCell>
                             <NextLink href={`/product/${item.slug}`} passHref>
                               <Link>
-                                <Typography>{item.name}</Typography>
+                                <Typography color="secondary">
+                                  {item.name}
+                                </Typography>
                               </Link>
                             </NextLink>
                           </TableCell>
@@ -255,7 +257,7 @@ export default function PlaceOrder(props) {
               </ListItem>
               <ListItem>
                 <Button
-                  color="primary"
+                  color="success"
                   fullWidth
                   variant="outlined"
                   onClick={placeOrderHandler}

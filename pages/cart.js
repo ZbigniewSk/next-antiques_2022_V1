@@ -66,7 +66,7 @@ export default function CartScreen(props) {
         <div>
           Cart is empty.{" "}
           <NextLink href="/" passHref>
-            <Link>Go shopping</Link>
+            <Link color="secondary">Go shopping</Link>
           </NextLink>
         </div>
       ) : (
@@ -100,7 +100,7 @@ export default function CartScreen(props) {
                       </TableCell>
                       <TableCell>
                         <NextLink href={`/product/${item.slug}`} passHref>
-                          <Link>
+                          <Link color="secondary">
                             <Typography>{item.name}</Typography>
                           </Link>
                         </NextLink>
@@ -126,7 +126,7 @@ export default function CartScreen(props) {
                       <TableCell align="right">
                         <Button
                           variant="outlined"
-                          color="secondary"
+                          color="warning"
                           onClick={() => removeItemHandler(item)}
                         >
                           x
@@ -150,7 +150,7 @@ export default function CartScreen(props) {
                 </ListItem>
                 <ListItem>
                   <Button
-                    color="primary"
+                    color="success"
                     fullWidth
                     variant="outlined"
                     onClick={checkoutHandler}

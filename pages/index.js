@@ -59,13 +59,9 @@ export default function Home(props) {
                     borderRadius: "50%",
                     border: "2px solid",
                     borderColor: "primary.main",
-
                     "&:hover": {
                       boxShadow: "0 5px 20px -5px",
                       color: "success.main",
-                      "+tekscik": {
-                        color: "red",
-                      },
                     },
                   }}
                 >
@@ -84,7 +80,6 @@ export default function Home(props) {
                 </Card>
               </NextLink>
               <Typography
-                className="tekscik"
                 component="h2"
                 variant="h2"
                 sx={{

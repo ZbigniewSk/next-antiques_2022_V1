@@ -7,25 +7,24 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import Layout from "../../components/Layout";
-import Product from "../../models/Product";
-import db from "../../utils/db";
+import data from "../../utils/data";
 import { Store } from "../../utils/Store";
 import { classes } from "../../utils/styles";
 
 export default function ProductScreen(props) {
-  const { setThemeHandler, currentTheme, product } = props;
+  const { setThemeHandler, currentTheme /*product*/ } = props;
   // const classes = useStyles();
-  // const router = useRouter();
-  // const { slug } = router.query;
-  // const product = data.products.find((a) => a.slug === slug);
-  const { state, dispatch } = useContext(Store);
   const router = useRouter();
+  const { products } = data;
+  const { slug } = router.query;
+  const product = products.find((a) => a.slug === slug);
+  const { state, dispatch } = useContext(Store);
+  // const router = useRouter();
   if (!product) {
     return <div>Product Not Found</div>;
   }
@@ -33,11 +32,11 @@ export default function ProductScreen(props) {
   const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
-      return;
-    }
+    // const { data } = await axios.get(`/api/products/${product._id}`);
+    // if (data.countInStock < quantity) {
+    //   window.alert("Sorry. Product is out of stock");
+    //   return;
+    // }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
@@ -51,7 +50,7 @@ export default function ProductScreen(props) {
     >
       <div style={classes.section}>
         <NextLink href="/" passHref>
-          <Link>
+          <Link color="secondary">
             <Typography>back to products</Typography>
           </Link>
         </NextLink>
@@ -64,6 +63,7 @@ export default function ProductScreen(props) {
             width={640}
             height={640}
             layout="responsive"
+            objectFit="contain"
           ></Image>
         </Grid>
         <Grid item md={3} xs={12}>
@@ -118,7 +118,7 @@ export default function ProductScreen(props) {
                 <Button
                   fullWidth
                   variant="text"
-                  color="primary"
+                  color="success"
                   onClick={addToCartHandler}
                 >
                   Add to cart
@@ -132,15 +132,15 @@ export default function ProductScreen(props) {
   );
 }
 
-export async function getServerSideProps(ctx) {
-  const { params } = ctx;
-  const { slug } = params;
-  await db.connect();
-  const product = await Product.findOne({ slug }).lean();
-  await db.disconnect();
-  return {
-    props: {
-      product: db.convertDocToObj(product),
-    },
-  };
-}
+// export async function getServerSideProps(ctx) {
+//   const { params } = ctx;
+//   const { slug } = params;
+//   await db.connect();
+//   const product = await Product.findOne({ slug }).lean();
+//   await db.disconnect();
+//   return {
+//     props: {
+//       product: db.convertDocToObj(product),
+//     },
+//   };
+// }

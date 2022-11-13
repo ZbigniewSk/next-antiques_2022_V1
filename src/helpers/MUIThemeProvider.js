@@ -1,12 +1,11 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-// import { useTheme } from "next-themes";
-import { darkTheme, lightTheme } from "../theme";
+
+import { theme } from "../theme";
 
 const MUIThemeProvider = ({ children, currentTheme }) => {
   return (
-    <ThemeProvider theme={currentTheme === "dark" ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme(currentTheme)}>
       <CssBaseline />
-      {/* <GlobalStyles styles={globalStyles} /> */}
       {children}
     </ThemeProvider>
   );

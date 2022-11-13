@@ -248,7 +248,9 @@ export default function Order(props) {
                             <TableCell>
                               <NextLink href={`/product/${item.slug}`} passHref>
                                 <Link>
-                                  <Typography>{item.name}</Typography>
+                                  <Typography color="secondary">
+                                    {item.name}
+                                  </Typography>
                                 </Link>
                               </NextLink>
                             </TableCell>

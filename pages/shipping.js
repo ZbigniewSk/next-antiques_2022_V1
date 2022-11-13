@@ -83,6 +83,7 @@ export default function Shipping(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="fullName"
@@ -111,6 +112,7 @@ export default function Shipping(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="address"
@@ -139,6 +141,7 @@ export default function Shipping(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="city"
@@ -167,6 +170,7 @@ export default function Shipping(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="postalCode"
@@ -195,6 +199,7 @@ export default function Shipping(props) {
               }}
               render={({ field }) => (
                 <TextField
+                  color="success"
                   variant="outlined"
                   fullWidth
                   id="country"
@@ -214,7 +219,7 @@ export default function Shipping(props) {
           </ListItem>
 
           <ListItem>
-            <Button variant="outlined" type="submit" fullWidth color="primary">
+            <Button variant="outlined" type="submit" fullWidth color="success">
               Continue
             </Button>
           </ListItem>

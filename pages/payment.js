@@ -88,29 +88,29 @@ export default function Payment(props) {
                 <FormControlLabel
                   label="PayPal"
                   value="PayPal"
-                  control={<Radio />}
+                  control={<Radio color="success" />}
                 ></FormControlLabel>
                 <FormControlLabel
                   label="Stripe"
                   value="Stripe"
-                  control={<Radio />}
+                  control={<Radio color="success" />}
                 ></FormControlLabel>
                 <FormControlLabel
                   label="Cash"
                   value="Cash"
-                  control={<Radio />}
+                  control={<Radio color="success" />}
                 ></FormControlLabel>
               </RadioGroup>
             </FormControl>
           </ListItem>
           <ListItem>
-            <Button fullWidth type="submit" variant="outlined" color="primary">
+            <Button fullWidth type="submit" variant="outlined" color="success">
               Continue
             </Button>
           </ListItem>
           <ListItem>
             <Button
-              color="grey"
+              color="warning"
               fullWidth
               variant="outlined"
               onClick={() => router.push("/shipping")}
