@@ -20,9 +20,6 @@ export default function Payment(props) {
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("");
   const { dispatch } = useContext(Store);
-  //   const {
-  //     cart: { shippingAddress },
-  //   } = state;
 
   useEffect(() => {
     const userInfoStorage = localStorage.getItem("userInfo")

@@ -24,7 +24,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
 import Layout from "../components/Layout";
 import { getError } from "../utils/error";
-import { classes } from "../utils/styles";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -110,7 +109,7 @@ export default function OrderHistory(props) {
                 {loading ? (
                   <CircularProgress />
                 ) : error ? (
-                  <Typography style={classes.error}>{error}</Typography>
+                  <Typography color="error">{error}</Typography>
                 ) : (
                   <TableContainer>
                     <Table>
