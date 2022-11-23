@@ -271,5 +271,3 @@ export default function PlaceOrder(props) {
     </Layout>
   );
 }
-
-// export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });

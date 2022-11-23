@@ -2,7 +2,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { getCookie } from "cookies-next";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import PageProvider from "../src/helpers/PageProvider";
+import PageProvider from "../utils/helpers/PageProvider";
 import { StoreProvider } from "../utils/Store";
 
 function App(props) {

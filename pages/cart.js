@@ -192,4 +192,3 @@ export async function getServerSideProps() {
     },
   };
 }
-// export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
