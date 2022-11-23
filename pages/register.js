@@ -15,7 +15,6 @@ import { Controller, useForm } from "react-hook-form";
 import Layout from "../components/Layout";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
-import { classes } from "../utils/styles";
 
 export default function Register(props) {
   const {
@@ -62,7 +61,14 @@ export default function Register(props) {
 
   return (
     <Layout title="Register" props={props}>
-      <form style={classes.form} onSubmit={handleSubmit(submitHandler)}>
+      <form
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+        onSubmit={handleSubmit(submitHandler)}
+      >
         <Typography component="h1" variant="h1">
           Register
         </Typography>

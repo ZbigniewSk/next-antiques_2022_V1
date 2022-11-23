@@ -14,7 +14,6 @@ import React, { useContext, useEffect, useState } from "react";
 import CheckoutWizzard from "../components/CheckoutWizzard";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
-import { classes } from "../utils/styles";
 
 export default function Payment(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -67,7 +66,14 @@ export default function Payment(props) {
   return (
     <Layout title="Payment Method" props={props}>
       <CheckoutWizzard activeStep={2} />
-      <form styles={classes.form} onSubmit={submitHandler}>
+      <form
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+        onSubmit={submitHandler}
+      >
         <Typography component="h1" variant="h1">
           Payment Method
         </Typography>
@@ -105,7 +111,7 @@ export default function Payment(props) {
           </ListItem>
           <ListItem>
             <Button
-              color="warning"
+              color="grey"
               fullWidth
               variant="outlined"
               onClick={() => router.push("/shipping")}

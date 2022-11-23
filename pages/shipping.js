@@ -5,7 +5,6 @@ import { Controller, useForm } from "react-hook-form";
 import CheckoutWizzard from "../components/CheckoutWizzard";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
-import { classes } from "../utils/styles";
 
 export default function Shipping(props) {
   const {
@@ -61,7 +60,14 @@ export default function Shipping(props) {
   return (
     <Layout title="Shipping" props={props}>
       <CheckoutWizzard activeStep={1} />
-      <form style={classes.form} onSubmit={handleSubmit(submitHandler)}>
+      <form
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+        onSubmit={handleSubmit(submitHandler)}
+      >
         <Typography component="h1" variant="h1">
           Shipping Address
         </Typography>

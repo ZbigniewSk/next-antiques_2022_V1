@@ -23,7 +23,6 @@ import React, { useContext, useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
-import { classes } from "../../utils/styles";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -171,11 +170,16 @@ export default function Order(props) {
       {loading ? (
         <CircularProgress />
       ) : error ? (
-        <Typography style={classes.error}>{error}</Typography>
+        <Typography color="error">{error}</Typography>
       ) : (
         <Grid container spacing={1}>
           <Grid item md={9} xs={12}>
-            <Card sx={classes.section}>
+            <Card
+              sx={{
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
               <List>
                 <ListItem>
                   <Typography component="h2" variant="h2">
@@ -195,7 +199,12 @@ export default function Order(props) {
                 </ListItem>
               </List>
             </Card>
-            <Card sx={classes.section}>
+            <Card
+              sx={{
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
               <List>
                 <ListItem>
                   <Typography component="h2" variant="h2">
@@ -208,7 +217,12 @@ export default function Order(props) {
                 </ListItem>
               </List>
             </Card>
-            <Card sx={classes.section}>
+            <Card
+              sx={{
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
               <List>
                 <ListItem>
                   <Typography component="h2" variant="h2">
@@ -266,7 +280,12 @@ export default function Order(props) {
             </Card>
           </Grid>
           <Grid item md={3} xs={12}>
-            <Card sx={classes.section}>
+            <Card
+              sx={{
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
               <List>
                 <ListItem>
                   <Typography variant="h2">Order Summary</Typography>
@@ -321,7 +340,7 @@ export default function Order(props) {
                     {isPending ? (
                       <CircularProgress />
                     ) : (
-                      <div style={classes.fullWidth}>
+                      <div style={{ width: "100%" }}>
                         <PayPalButtons
                           createOrder={createOrder}
                           onApprove={onApprove}
@@ -340,7 +359,6 @@ export default function Order(props) {
   );
 }
 
-// export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }

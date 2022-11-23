@@ -24,7 +24,6 @@ import CheckoutWizzard from "../components/CheckoutWizzard";
 import Layout from "../components/Layout";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
-import { classes } from "../utils/styles";
 
 export default function PlaceOrder(props) {
   const { state, dispatch } = useContext(Store);
@@ -119,7 +118,7 @@ export default function PlaceOrder(props) {
 
       <Grid container spacing={1}>
         <Grid item md={9} xs={12}>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography component="h2" variant="h2">
@@ -133,7 +132,7 @@ export default function PlaceOrder(props) {
               </ListItem>
             </List>
           </Card>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography component="h2" variant="h2">
@@ -143,7 +142,7 @@ export default function PlaceOrder(props) {
               <ListItem>{paymentMethod}</ListItem>
             </List>
           </Card>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography component="h2" variant="h2">
@@ -201,7 +200,7 @@ export default function PlaceOrder(props) {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card sx={classes.section}>
+          <Card sx={{ mt: "10px" }}>
             <List>
               <ListItem>
                 <Typography variant="h2">Order Summary</Typography>

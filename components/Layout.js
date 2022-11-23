@@ -44,7 +44,7 @@ export default function Layout({ title, description, children, props }) {
                   height: "80px",
                 }}
               >
-                <SearchBar />
+                <SearchBar props={props} />
                 <UserInfoMenu />
                 <CartButton />
                 <ThemeButton props={props} />
@@ -77,7 +77,7 @@ export default function Layout({ title, description, children, props }) {
               </Box>
             </Box>
             <Box sx={{ mb: "10px" }}>
-              <SearchBar />
+              <SearchBar props={props} />
             </Box>
           </Box>
         </Toolbar>

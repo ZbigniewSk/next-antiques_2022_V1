@@ -70,7 +70,7 @@ export default function Category(props) {
         </h1>
         <Grid container spacing={3} justifyContent="center">
           {productsOfOneCategory.map((product) => (
-            <Grid item sm={6} md={4} key={product.name}>
+            <Grid item xs={12} sm={6} md={4} key={product.name}>
               <Card
                 sx={{
                   "&:hover": {
@@ -86,7 +86,7 @@ export default function Category(props) {
                       image={product.image}
                       title={product.name}
                       sx={{
-                        maxWidth: "400px",
+                        maxWidth: "600px",
                         aspectRatio: "1/1",
                       }}
                     ></CardMedia>

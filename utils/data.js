@@ -123,7 +123,7 @@ const data = {
     {
       name: "Magnifying Glass",
       slug: "magnifying-glass-1",
-      category: "Spyglasses",
+      category: "Spy Glasses",
       subcategory: "Magnifying Glasses",
       image: "/images/vintage/spyglasses/magnifying_glass1.jpg",
       price: 50,
@@ -136,7 +136,7 @@ const data = {
     {
       name: "Telescope",
       slug: "telescope-1",
-      category: "Spyglasses",
+      category: "Spy Glasses",
       subcategory: "Telescopes",
       image: "/images/vintage/spyglasses/telescope1.jpg",
       price: 550,

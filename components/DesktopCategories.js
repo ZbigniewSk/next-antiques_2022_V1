@@ -51,7 +51,13 @@ export default function DesktopCategories({ props }) {
               },
             }}
           >
-            <Typography>{category.toUpperCase()}</Typography>
+            <Typography
+              sx={{
+                whiteSpace: "nowrap",
+              }}
+            >
+              {category.toUpperCase()}
+            </Typography>
           </Link>
         </NextLink>
       ))}

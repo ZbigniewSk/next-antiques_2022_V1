@@ -1,3 +1,4 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -56,6 +57,21 @@ export default function CartScreen(props) {
 
   return (
     <Layout title="Shopping Cart" props={props}>
+      {cartItems.length > 0 && (
+        <div
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+          }}
+        >
+          <NextLink href="/" passHref>
+            <Link color="secondary" sx={{ display: "inline-flex" }}>
+              <ArrowBack />
+              <span>&nbsp;continue shopping</span>
+            </Link>
+          </NextLink>
+        </div>
+      )}
       <Typography component="h1" variant="h1">
         Shopping Cart
       </Typography>
