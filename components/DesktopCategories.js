@@ -5,7 +5,7 @@ import React from "react";
 export default function DesktopCategories({ props }) {
   const { products } = props;
 
-  if (!products) {
+  if (!products || products.length < 1) {
     return <div></div>;
   }
 

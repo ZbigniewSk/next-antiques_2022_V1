@@ -17,18 +17,21 @@ export default function Home(props) {
 
   // const { products } = data;
 
-  const oneProductForEachCategory = products.reduce(
-    (previousValue, currentValue) => {
-      if (!Array.isArray(previousValue)) {
-        previousValue = [].concat(previousValue);
-      }
-      if (
-        previousValue.find((value) => value.category === currentValue.category)
-      )
-        return previousValue;
-      return previousValue.concat(currentValue);
-    }
-  );
+  const oneProductForEachCategory =
+    products.length > 0
+      ? products.reduce((previousValue, currentValue) => {
+          if (!Array.isArray(previousValue)) {
+            previousValue = [].concat(previousValue);
+          }
+          if (
+            previousValue.find(
+              (value) => value.category === currentValue.category
+            )
+          )
+            return previousValue;
+          return previousValue.concat(currentValue);
+        })
+      : [];
 
   return (
     <Layout props={props}>
