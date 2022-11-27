@@ -1,13 +1,22 @@
 import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import React from "react";
 import CartButton from "./CartButton";
-import DesktopCategories from "./DesktopCategories";
-import HamburgerMenu from "./HamburgerMenu";
+// import DesktopCategories from "./DesktopCategories";
+// import HamburgerMenu from "./HamburgerMenu";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import ThemeButton from "./ThemeButton";
 import UserInfoMenu from "./UserInfoMenu";
+
+// const CartButton = dynamic(() => import("./CartButton"));
+const DesktopCategories = dynamic(() => import("./DesktopCategories"));
+const HamburgerMenu = dynamic(() => import("./HamburgerMenu"));
+// const Logo = dynamic(() => import("./Logo"));
+// const SearchBar = dynamic(() => import("./SearchBar"));
+// const ThemeButton = dynamic(() => import("./ThemeButton"));
+// const UserInfoMenu = dynamic(() => import("./UserInfoMenu"));
 
 export default function Layout({ title, description, children, props }) {
   return (
@@ -94,3 +103,5 @@ export default function Layout({ title, description, children, props }) {
     </div>
   );
 }
+
+// export default dynamic(() => Promise.resolve(Layout), { ssr: false });

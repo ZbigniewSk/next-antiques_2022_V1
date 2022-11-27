@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -20,7 +20,7 @@ import Product from "../../models/Product";
 import db from "../../utils/db";
 import { Store } from "../../utils/Store";
 
-function CategoryScreen(props) {
+export default function CategoryScreen(props) {
   const { products } = props;
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
@@ -127,4 +127,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default dynamic(() => Promise.resolve(CategoryScreen), { ssr: false });
+// export default dynamic(() => Promise.resolve(CategoryScreen), { ssr: false });
