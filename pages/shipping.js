@@ -1,4 +1,5 @@
 import { Button, List, ListItem, TextField, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -6,7 +7,7 @@ import CheckoutWizzard from "../components/CheckoutWizzard";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 
-export default function Shipping(props) {
+function Shipping(props) {
   const {
     handleSubmit,
     control,
@@ -228,3 +229,5 @@ export default function Shipping(props) {
     </Layout>
   );
 }
+
+export default dynamic(() => Promise.resolve(Shipping), { ssr: false });

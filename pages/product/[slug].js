@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -19,7 +20,7 @@ import db from "../../utils/db";
 // import data from "../../utils/data";
 import { Store } from "../../utils/Store";
 
-export default function ProductScreen(props) {
+function ProductScreen(props) {
   const { product } = props;
   // const classes = useStyles();
   const router = useRouter();
@@ -160,3 +161,5 @@ export async function getServerSideProps(ctx) {
     },
   };
 }
+
+export default dynamic(() => Promise.resolve(ProductScreen), { ssr: false });

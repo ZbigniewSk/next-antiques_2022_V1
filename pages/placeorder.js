@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -25,7 +26,7 @@ import Layout from "../components/Layout";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
 
-export default function PlaceOrder(props) {
+function PlaceOrder(props) {
   const { state, dispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const { cartItems, shippingAddress, paymentMethod } = cart;
@@ -271,3 +272,5 @@ export default function PlaceOrder(props) {
     </Layout>
   );
 }
+
+export default dynamic(() => Promise.resolve(PlaceOrder), { ssr: false });

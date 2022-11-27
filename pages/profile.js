@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
@@ -22,7 +23,7 @@ import Layout from "../components/Layout";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
 
-export default function Profile(props) {
+function Profile(props) {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const router = useRouter();
@@ -256,3 +257,5 @@ export default function Profile(props) {
     </Layout>
   );
 }
+
+export default dynamic(() => Promise.resolve(Profile), { ssr: false });

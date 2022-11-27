@@ -8,6 +8,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
@@ -15,7 +16,7 @@ import CheckoutWizzard from "../components/CheckoutWizzard";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 
-export default function Payment(props) {
+function Payment(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -121,3 +122,5 @@ export default function Payment(props) {
     </Layout>
   );
 }
+
+export default dynamic(() => Promise.resolve(Payment), { ssr: false });

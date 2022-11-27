@@ -18,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -27,7 +28,7 @@ import Product from "../models/Product";
 import db from "../utils/db";
 import { Store } from "../utils/Store";
 
-export default function CartScreen(props) {
+function CartScreen(props) {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { cartItems } = cart;
@@ -192,3 +193,5 @@ export async function getServerSideProps() {
     },
   };
 }
+
+export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });

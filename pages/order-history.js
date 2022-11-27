@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
@@ -38,7 +39,7 @@ function reducer(state, action) {
   }
 }
 
-export default function OrderHistory(props) {
+function OrderHistory(props) {
   const router = useRouter();
 
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
@@ -160,3 +161,5 @@ export default function OrderHistory(props) {
     </Layout>
   );
 }
+
+export default dynamic(() => Promise.resolve(OrderHistory), { ssr: false });

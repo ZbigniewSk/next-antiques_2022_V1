@@ -5,6 +5,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+// import dynamic from "next/dynamic";
 // import axios from "axios";
 import NextLink from "next/link";
 import Layout from "../components/Layout";
@@ -101,3 +102,5 @@ export async function getServerSideProps() {
     },
   };
 }
+
+// export default dynamic(() => Promise.resolve(Home), { ssr: false });

@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -45,7 +46,7 @@ function reducer(state, action) {
   }
 }
 
-export default function Order(props) {
+function Order(props) {
   const { params } = props;
   const orderId = params.id;
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -362,3 +363,5 @@ export default function Order(props) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
+
+export default dynamic(() => Promise.resolve(Order), { ssr: false });
