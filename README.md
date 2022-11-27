@@ -18,6 +18,11 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+Create .env with variables:
+MONGODB_URI=mongodb+srv://UserNormal:uwsh8bNdMLSO7i2k@cluster0.3acai.mongodb.net/OldClogs
+JWT_SECRET=somethingsecret
+PAYPAL_CLIENT_ID=AbBmtpxq0R5O-q5XdiHPrxlXcZ99Bl6audOtihACYm2P2kLI3TJdQ8IkG_aD3DcuNo7WAI2LP2cLOhKh
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
