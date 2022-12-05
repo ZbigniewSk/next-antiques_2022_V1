@@ -7,7 +7,7 @@ import {
   CardMedia,
   Grid,
   Link,
-  Typography,
+  Typography
 } from "@mui/material";
 import axios from "axios";
 // import dynamic from "next/dynamic";
@@ -20,20 +20,17 @@ import Product from "../../models/Product";
 import db from "../../utils/db";
 import { Store } from "../../utils/Store";
 
+import { convertCategoryToUrl, convertUrlToCategory } from "../../utils/common";
+
 export default function CategoryScreen(props) {
-  const { products } = props;
+  const { products = [] } = props;
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
 
-  // const { products } = data;
+  const categoryName = products?.find(() => true)?.category;
 
-  const { category } = router.query;
-  const productsOfOneCategory = products.filter(
-    (a) => a.category.toLowerCase().replace(/\s/, "-") === category
-  );
-
-  const addToCartHandler = async (product) => {
-    const existItem = state.cart.cartItems.find((x) => x._id === product._id);
+  const addToCartHandler = async product => {
+    const existItem = state.cart.cartItems.find(x => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
 
@@ -46,16 +43,11 @@ export default function CategoryScreen(props) {
   };
 
   return (
-    <Layout
-      title={
-        productsOfOneCategory && productsOfOneCategory.find(() => true).category
-      }
-      props={props}
-    >
+    <Layout title={categoryName} props={props}>
       <div
         style={{
           marginTop: "10px",
-          marginBottom: "10px",
+          marginBottom: "10px"
         }}
       >
         <NextLink href="/" passHref>
@@ -65,19 +57,16 @@ export default function CategoryScreen(props) {
         </NextLink>
       </div>
       <div>
-        <h1>
-          {productsOfOneCategory &&
-            productsOfOneCategory.find(() => true).category}
-        </h1>
+        <h1>{categoryName}</h1>
         <Grid container spacing={3} justifyContent="center">
-          {productsOfOneCategory.map((product) => (
+          {products.map(product => (
             <Grid item xs={12} sm={6} md={4} key={product.name}>
               <Card
                 sx={{
                   "&:hover": {
                     boxShadow: "0 5px 20px -5px",
-                    boxShadowColor: "success.main",
-                  },
+                    boxShadowColor: "success.main"
+                  }
                 }}
               >
                 <NextLink href={`/product/${product.slug}`} passHref>
@@ -88,7 +77,7 @@ export default function CategoryScreen(props) {
                       title={product.name}
                       sx={{
                         maxWidth: "600px",
-                        aspectRatio: "1/1",
+                        aspectRatio: "1/1"
                       }}
                     ></CardMedia>
                     <CardContent>
@@ -116,14 +105,44 @@ export default function CategoryScreen(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticPaths() {
   await db.connect();
   const products = await Product.find({}).lean();
   await db.disconnect();
+
+  const categorys = products.reduce((acc, product) => {
+    const category = convertCategoryToUrl(product.category);
+    if (!acc.includes(category)) {
+      acc.push(category);
+    }
+    return acc;
+  }, []);
+
+  return {
+    fallback: true,
+    paths: categorys.map(category => {
+      return {
+        params: {
+          category: category
+        }
+      };
+    })
+  };
+}
+
+export async function getStaticProps(ctx) {
+  const { params } = ctx;
+  const { category } = params;
+  await db.connect();
+  const products = await Product.find({
+    category: convertUrlToCategory(category)
+  }).lean();
+
+  await db.disconnect();
   return {
     props: {
-      products: products.map(db.convertDocToObj),
-    },
+      products: products.map(db.convertDocToObj)
+    }
   };
 }
 

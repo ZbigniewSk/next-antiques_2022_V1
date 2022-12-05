@@ -1,6 +1,7 @@
 import { Box, Link, Typography } from "@mui/material";
 import NextLink from "next/link";
 import React from "react";
+import { convertCategoryToUrl } from '../utils/common';
 
 export default function DesktopCategories({ props }) {
   const { products } = props;
@@ -36,7 +37,7 @@ export default function DesktopCategories({ props }) {
     >
       {categories.map((category) => (
         <NextLink
-          href={`/category/${category.toLowerCase().replace(/\s/, "-")}`}
+          href={`/category/${convertCategoryToUrl(category)}`}
           passHref
           key={category}
         >

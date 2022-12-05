@@ -21,6 +21,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { Store } from "../utils/Store";
+import { convertCategoryToUrl } from '../utils/common';
 
 export default function HamburgerMenu({ props }) {
   const { products } = props;
@@ -137,9 +138,7 @@ export default function HamburgerMenu({ props }) {
             {categories.map((category) => (
               <div key={category}>
                 <ListItemButton
-                  href={`/category/${category
-                    .toLowerCase()
-                    .replace(/\s/, "-")}`}
+                  href={`/category/${convertCategoryToUrl(category)}`}
                 >
                   <ListItemText>{category}</ListItemText>
                 </ListItemButton>

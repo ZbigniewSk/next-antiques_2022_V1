@@ -20,6 +20,8 @@ import db from "../../utils/db";
 // import data from "../../utils/data";
 import { Store } from "../../utils/Store";
 
+import { convertCategoryToUrl } from '../../utils/common';
+
 export default function ProductScreen(props) {
   const { product } = props;
   // const classes = useStyles();
@@ -58,9 +60,7 @@ export default function ProductScreen(props) {
         }}
       >
         <NextLink
-          href={`/category/${product.category
-            .toLowerCase()
-            .replace(/\s/, "-")}`}
+          href={`/category/${convertCategoryToUrl(product.category)}`}
           passHref
         >
           <Link color="secondary">
@@ -147,19 +147,35 @@ export default function ProductScreen(props) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticPaths() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+
+  return {
+    fallback: true,
+    paths: products.map((product) => {
+      return {
+        params: {
+          slug: product.slug
+        }
+      }
+    })
+  }
+}
+
+export async function getStaticProps(ctx) {
   const { params } = ctx;
   const { slug } = params;
 
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
-  const products = await Product.find({}).lean();
   await db.disconnect();
   return {
     props: {
-      product: db.convertDocToObj(product),
-      products: products.map(db.convertDocToObj),
+      product: db.convertDocToObj(product)
     },
+    revalidate: 60
   };
 }
 
