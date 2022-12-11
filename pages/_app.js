@@ -1,9 +1,16 @@
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { getCookie } from "cookies-next";
+import { Router } from "next/router";
 import { SnackbarProvider } from "notistack";
+import nProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { useState } from "react";
 import PageProvider from "../utils/helpers/PageProvider";
 import { StoreProvider } from "../utils/Store";
+
+Router.events.on("routeChangeStart", () => nProgress.start());
+Router.events.on("routeChangeComplete", () => nProgress.done());
+Router.events.on("routeChangeError", () => nProgress.done());
 
 function App(props) {
   const { Component, pageProps, initialTheme } = props;

@@ -18,7 +18,7 @@ export default function Logo() {
             }}
             color="secondary"
           >
-            Fancy Clogs
+            Antique Shop
           </Typography>
         </Link>
       </NextLink>

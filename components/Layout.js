@@ -22,7 +22,7 @@ export default function Layout({ title, description, children, props }) {
   return (
     <div>
       <Head>
-        <title>{title ? `${title} - Fancy Clogs` : "Fancy Clogs"}</title>
+        <title>{title ? `${title} - Antique` : "Antique"}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <AppBar
@@ -98,7 +98,7 @@ export default function Layout({ title, description, children, props }) {
           textAlign: "center",
         }}
       >
-        <Typography>All rights reserved. Fancy Clogs.</Typography>
+        <Typography>All rights reserved. Antique Shop.</Typography>
       </footer>
     </div>
   );

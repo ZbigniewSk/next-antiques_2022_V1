@@ -11,20 +11,36 @@ import NextLink from "next/link";
 import Layout from "../components/Layout";
 import Product from "../models/Product";
 // import data from "../utils/data";
+import { convertCategoryToUrl } from "../utils/common.js";
 import db from "../utils/db";
-import { convertCategoryToUrl } from '../utils/common.js'
 
 export default function Home(props) {
   const { products } = props;
 
   // const { products } = data;
 
+  const oneProductForEachCategory =
+    products.length > 0
+      ? products.reduce((previousValue, currentValue) => {
+          if (!Array.isArray(previousValue)) {
+            previousValue = [].concat(previousValue);
+          }
+          if (
+            previousValue.find(
+              (value) => value.category === currentValue.category
+            )
+          )
+            return previousValue;
+          return previousValue.concat(currentValue);
+        })
+      : [];
+
   return (
     <Layout props={props}>
       <div>
         <h1>Categories</h1>
         <Grid container rowSpacing={4} columnSpacing={8}>
-          {products.map((product) => (
+          {oneProductForEachCategory.map((product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.name}>
               <NextLink
                 href={`/category/${convertCategoryToUrl(product.category)}`}
@@ -75,32 +91,15 @@ export default function Home(props) {
   );
 }
 
-
 export async function getStaticProps() {
   await db.connect();
   const products = await Product.find({}).lean();
-
-  const oneProductForEachCategory =
-  products.length > 0
-    ? products.reduce((previousValue, currentValue) => {
-        if (!Array.isArray(previousValue)) {
-          previousValue = [].concat(previousValue);
-        }
-        if (
-          previousValue.find(
-            (value) => value.category === currentValue.category
-          )
-        )
-          return previousValue;
-        return previousValue.concat(currentValue);
-      })
-    : [];
   await db.disconnect();
   return {
     props: {
-      products: oneProductForEachCategory.map(db.convertDocToObj),
+      products: products.map(db.convertDocToObj),
     },
-    revalidate: 60
+    revalidate: 60,
   };
 }
 
